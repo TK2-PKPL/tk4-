@@ -16,7 +16,7 @@
 
 ## 2. Link Video Demo
 
-Link video YouTube Unlisted: **[ISI LINK VIDEO UNLISTED DI SINI]**
+Link video YouTube Unlisted: https://youtu.be/QJkPfljkLCE?si=p4_14dYbqTLFwwYc
 
 Catatan untuk pengisian akhir: video harus berdurasi 10 sampai 15 menit dan membahas prosedur unit testing, pentesting, UAT, OAT, hasil pengujian, serta kesimpulan keamanan aplikasi.
 
@@ -525,34 +525,3 @@ Operational Acceptance Testing dilakukan untuk memastikan aplikasi dapat dijalan
 
 Aplikasi layak dijalankan pada lingkungan lokal untuk kebutuhan demonstrasi dan pengujian. Untuk produksi, aplikasi masih memerlukan hardening deployment, terutama HTTPS, HSTS, reverse proxy, monitoring, backup, dan pengelolaan secret yang lebih ketat.
 
-## 9. Script Video Demo 10 sampai 15 Menit
-
-Bagian ini dapat digunakan sebagai panduan saat membuat video YouTube Unlisted.
-
-| Menit | Isi video |
-|---|---|
-| 0:00 sampai 1:00 | Perkenalan kelompok, target aplikasi, dan scope Tugas 4 |
-| 1:00 sampai 2:00 | Ringkasan Secure HR & Payroll Portal dan role pengguna |
-| 2:00 sampai 4:00 | Menjalankan unit test dengan `python manage.py test core -v 2` dan menjelaskan hasil 20 test lulus |
-| 4:00 sampai 6:00 | Menjelaskan test code injection, SQL injection, broken authentication, dan CSRF |
-| 6:00 sampai 8:00 | Menjalankan atau menunjukkan hasil pentesting manual pada `docs/pentest-logs/tugas4_manual_pentest_result.txt` |
-| 8:00 sampai 10:00 | Menjelaskan threat modeling, scanning, exploitation, dan remediation |
-| 10:00 sampai 12:00 | Demo UAT per role: karyawan, manajer, HR, Finance |
-| 12:00 sampai 13:30 | Demo OAT: instalasi, migrasi, seed data, audit log, security header |
-| 13:30 sampai 15:00 | Kesimpulan, batasan, dan saran hardening produksi |
-
-## 10. Bukti Pendukung
-
-| File | Isi |
-|---|---|
-| `core/tests.py` | Unit test utama untuk secure coding dan access control |
-| `docs/test-logs/tugas4_unit_test_result.txt` | Log hasil unit testing |
-| `docs/pentest-logs/manual_pentest.py` | Script pentesting manual berbasis HTTP request |
-| `docs/pentest-logs/tugas4_manual_pentest_result.txt` | Log hasil pentesting manual |
-| `docs/screenshots/` | Screenshot aplikasi dari Tugas 3 |
-
-## 11. Kesimpulan Akhir
-
-Berdasarkan unit testing, pentesting, UAT, dan OAT, aplikasi **Secure HR & Payroll Portal** sudah memenuhi fokus utama Tugas 4. Seluruh unit test lulus, endpoint sensitif terlindungi, payload SQL injection dan code injection tidak berhasil dieksekusi, CSRF protection berjalan, lockout login aktif, dan akses role sudah mengikuti prinsip least privilege.
-
-Aplikasi masih perlu hardening produksi seperti HTTPS, HSTS, reverse proxy, monitoring keamanan, backup rutin, dan audit log append-only. Namun, untuk scope tugas dan pengujian lokal, aplikasi sudah sesuai dengan requirement Tugas 4.
