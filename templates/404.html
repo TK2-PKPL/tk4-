@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Halaman tidak ditemukan - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="error-panel">
+  <span class="eyebrow">404</span>
+  <h1>Halaman tidak ditemukan</h1>
+  <p>Alamat yang diminta tidak tersedia pada aplikasi.</p>
+  <a class="btn btn-primary" href="{% url 'dashboard' %}">Kembali ke dashboard</a>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{% if mode == 'update' %}Update Payroll{% else %}Buat Payroll{% endif %} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="form-shell wide">
+  <div class="section-heading">
+    <span class="eyebrow">HR Payroll</span>
+    <h1>{% if mode == 'update' %}Update draft payroll{% else %}Buat draft payroll{% endif %}</h1>
+    <p>Perhitungan total gaji dilakukan oleh model. Input negatif, periode tidak valid, dan potongan yang melebihi gaji akan ditolak.</p>
+  </div>
+  <form method="post" class="secure-form grid-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <label>{{ field.label }}{{ field }}{{ field.errors }}</label>
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">{% if mode == 'update' %}Simpan perubahan{% else %}Simpan draft{% endif %}</button>
+  </form>
+</section>
+{% endblock %}

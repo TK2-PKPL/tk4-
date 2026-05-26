@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      {% if request.user.is_authenticated %}
+      <a class="brand" href="{% url 'dashboard' %}">
+      {% else %}
+      <a class="brand" href="{% url 'home' %}">
+      {% endif %}
+        <span class="brand-mark">HR</span>
+        <span>
+          <strong>{{ site_name }}</strong>
+          <small>{{ site_tagline }}</small>
+        </span>
+      </a>
+      <nav class="main-nav">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'dashboard' %}">Dashboard</a>
+          <a href="{% url 'employee_list' %}">Karyawan</a>
+          <a href="{% url 'attendance_list' %}">Absensi</a>
+          <a href="{% url 'payroll_list' %}">Payroll</a>
+          {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+            <a href="{% url 'audit_log_list' %}">Audit</a>
+          {% endif %}
+        {% endif %}
+      </nav>
+      <div class="header-actions">
+        {% if request.user.is_authenticated %}
+          <div class="user-chip">
+            <span>{{ request.user.display_name|default:request.user.username }}</span>
+            <small>{{ request.user.role_label }}</small>
+          </div>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-soft" type="submit">Keluar</button>
+          </form>
+        {% else %}
+          <a class="btn btn-primary" href="{% url 'login' %}">Masuk</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% if messages %}
+  <div class="container flash-stack">
+    {% for message in messages %}
+      <div class="flash flash-{{ message.tags|default:'info' }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main class="container page-shell">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>Secure Coding Implementation</p>
+      <p>Django, SQLite, CSRF, RBAC, ORM, audit log, dan lockout login</p>
+    </div>
+  </footer>
+</body>
+</html>

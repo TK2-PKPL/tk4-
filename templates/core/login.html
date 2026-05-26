@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Login - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="form-shell narrow">
+  <div class="section-heading">
+    <span class="eyebrow">Autentikasi</span>
+    <h1>Masuk ke Secure HR & Payroll Portal</h1>
+    <p>Masukkan akun demo sesuai peran. Password disimpan dengan hash bawaan Django dan tidak pernah ditampilkan dalam log.</p>
+  </div>
+  <form method="post" class="secure-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <label>Username{{ form.username }}</label>
+    <label>Password{{ form.password }}</label>
+    <button class="btn btn-primary full" type="submit">Masuk</button>
+  </form>
+  <div class="demo-box">
+    <strong>Akun demo</strong>
+    <p>employee1 / DemoPass123</p>
+    <p>manager1 / DemoPass123</p>
+    <p>hr1 / DemoPass123</p>
+    <p>finance1 / DemoPass123</p>
+    <p>admin1 / DemoPass123</p>
+  </div>
+</section>
+{% endblock %}

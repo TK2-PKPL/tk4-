@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Data Karyawan - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading row-between">
+  <div>
+    <span class="eyebrow">Master data</span>
+    <h1>Data karyawan</h1>
+    <p>Daftar ini hanya dapat diakses oleh HR, admin, dan manajer sesuai ruang lingkup timnya. Pencarian memakai Django ORM dan input disanitasi.</p>
+  </div>
+  {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+    <a class="btn btn-primary" href="{% url 'employee_create' %}">Tambah karyawan</a>
+  {% endif %}
+</section>
+
+<form method="get" class="secure-form search-form" action="{% url 'employee_list' %}">
+  <label for="q">Cari NIP, nama, jabatan, email, atau departemen</label>
+  <div class="inline-form">
+    <input id="q" name="q" type="search" value="{{ q }}" placeholder="Contoh: EMP001">
+    <button class="btn btn-soft" type="submit">Cari</button>
+    {% if q %}<a class="btn btn-soft" href="{% url 'employee_list' %}">Reset</a>{% endif %}
+  </div>
+</form>
+
+<div class="table-card">
+  <table>
+    <thead><tr><th>ID/NIP</th><th>Nama</th><th>Jabatan</th><th>Departemen</th><th>Status</th><th>Aksi</th></tr></thead>
+    <tbody>
+      {% for employee in employees %}
+        <tr>
+          <td>{{ employee.employee_id }}</td>
+          <td>{{ employee.full_name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.department.name }}</td>
+          <td><span class="pill">{{ employee.get_status_display }}</span></td>
+          <td>
+            <a href="{% url 'employee_detail' employee.pk %}">Detail</a>
+            {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+              · <a href="{% url 'employee_update' employee.pk %}">Edit</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">Tidak ada data karyawan yang cocok.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

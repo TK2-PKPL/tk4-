@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Absensi - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading row-between">
+  <div>
+    <span class="eyebrow">Absensi</span>
+    <h1>Riwayat absensi</h1>
+    <p>Karyawan hanya melihat absensinya sendiri. Manajer melihat bawahan langsung. HR melihat seluruh data.</p>
+  </div>
+  {% if request.user.role == 'employee' %}
+    <div class="inline-actions">
+      <form method="post" action="{% url 'attendance_check_in' %}" class="inline-form">
+        {% csrf_token %}
+        <input type="text" name="note" maxlength="140" placeholder="Catatan opsional">
+        <button class="btn btn-primary" type="submit">Check in</button>
+      </form>
+      <form method="post" action="{% url 'attendance_check_out' %}" class="inline-form">
+        {% csrf_token %}
+        <button class="btn btn-soft" type="submit">Check out</button>
+      </form>
+    </div>
+  {% endif %}
+</section>
+
+<div class="table-card">
+  <table>
+    <thead><tr><th>Tanggal</th><th>Karyawan</th><th>Check in</th><th>Check out</th><th>Status</th><th>Catatan</th></tr></thead>
+    <tbody>
+      {% for attendance in attendances %}
+        <tr>
+          <td>{{ attendance.attendance_date|date:"d M Y" }}</td>
+          <td>{{ attendance.employee.full_name }}</td>
+          <td>{{ attendance.check_in|date:"H:i"|default:"-" }}</td>
+          <td>{{ attendance.check_out|date:"H:i"|default:"-" }}</td>
+          <td><span class="pill">{{ attendance.get_status_display }}</span></td>
+          <td>{{ attendance.note|default:"-" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">Belum ada data absensi.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

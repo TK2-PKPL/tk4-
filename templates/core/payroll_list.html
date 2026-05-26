@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Payroll - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading row-between">
+  <div>
+    <span class="eyebrow">Payroll</span>
+    <h1>Slip gaji</h1>
+    <p>HR membuat payroll, Finance melakukan approval, dan karyawan hanya melihat slip yang sudah disetujui.</p>
+  </div>
+  {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+    <a class="btn btn-primary" href="{% url 'payroll_create' %}">Buat payroll</a>
+  {% endif %}
+</section>
+
+<div class="table-card">
+  <table>
+    <thead><tr><th>Periode</th><th>Karyawan</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead>
+    <tbody>
+      {% for payroll in payrolls %}
+        <tr>
+          <td>{{ payroll.period }}</td>
+          <td>{{ payroll.employee.full_name }}</td>
+          <td>Rp {{ payroll.total_salary }}</td>
+          <td><span class="pill">{{ payroll.get_status_display }}</span></td>
+          <td><a href="{% url 'payroll_detail' payroll.pk %}">Detail</a></td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">Belum ada data payroll.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

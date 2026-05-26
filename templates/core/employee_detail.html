@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Detail Karyawan - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading row-between">
+  <div>
+    <span class="eyebrow">Profil karyawan</span>
+    <h1>{{ employee.full_name }}</h1>
+    <p>{{ employee.employee_id }} - {{ employee.position }} - {{ employee.department.name }}</p>
+  </div>
+  {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+    <a class="btn btn-primary" href="{% url 'employee_update' employee.pk %}">Edit data</a>
+  {% endif %}
+</section>
+
+<section class="detail-grid">
+  <article class="card"><h3>Identitas</h3><p>NIK: {{ employee.nik }}</p><p>Email: {{ employee.email }}</p><p>Telepon: {{ employee.phone }}</p><p>Alamat: {{ employee.address }}</p></article>
+  <article class="card"><h3>Kepegawaian</h3><p>Jabatan: {{ employee.position }}</p><p>Status: {{ employee.get_status_display }}</p><p>Saldo cuti: {{ employee.leave_balance }} hari</p><p>Manajer: {{ employee.manager.display_name|default:"-" }}</p></article>
+  {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+    <article class="card"><h3>Data payroll</h3><p>Gaji pokok: Rp {{ employee.base_salary }}</p><p>Rekening: {{ employee.bank_account }}</p><p>Data ini ditampilkan terbatas untuk HR dan admin.</p></article>
+  {% endif %}
+</section>
+{% endblock %}

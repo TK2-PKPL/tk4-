@@ -1,0 +1,57 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Found 20 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: forms, messages, staticfiles
+  Apply all migrations: accounts, admin, auth, contenttypes, core, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying core.0001_initial... OK
+  Applying core.0002_employee_position_and_id_format... OK
+  Applying sessions.0001_initial...test_least_privilege_employee_only_sees_approved_or_paid_own_payslips (core.tests.SecureCodingTestCase.test_least_privilege_employee_only_sees_approved_or_paid_own_payslips) ... ok
+test_least_privilege_manager_only_sees_direct_reports (core.tests.SecureCodingTestCase.test_least_privilege_manager_only_sees_direct_reports) ... ok
+test_payroll_formula_rejects_negative_or_excessive_deduction (core.tests.SecureCodingTestCase.test_payroll_formula_rejects_negative_or_excessive_deduction) ... ok
+test_tc_ba_01_password_is_hashed_with_pbkdf2_not_plaintext (core.tests.SecureCodingTestCase.test_tc_ba_01_password_is_hashed_with_pbkdf2_not_plaintext) ... ok
+test_tc_ba_02_login_is_locked_after_five_failed_attempts (core.tests.SecureCodingTestCase.test_tc_ba_02_login_is_locked_after_five_failed_attempts) ... ok
+test_tc_ba_03_old_session_cookie_cannot_access_dashboard_after_logout (core.tests.SecureCodingTestCase.test_tc_ba_03_old_session_cookie_cannot_access_dashboard_after_logout) ... ok
+test_tc_ba_04_protected_hr_pages_redirect_without_login (core.tests.SecureCodingTestCase.test_tc_ba_04_protected_hr_pages_redirect_without_login) ... ok
+test_tc_ba_05_login_error_is_generic_for_unknown_and_known_user (core.tests.SecureCodingTestCase.test_tc_ba_05_login_error_is_generic_for_unknown_and_known_user) ... ok
+test_tc_ci_01_script_tag_input_is_rejected_and_not_rendered_raw (core.tests.SecureCodingTestCase.test_tc_ci_01_script_tag_input_is_rejected_and_not_rendered_raw) ... ok
+test_tc_ci_02_html_injection_is_stripped_not_rendered_as_html (core.tests.SecureCodingTestCase.test_tc_ci_02_html_injection_is_stripped_not_rendered_as_html) ... ok
+test_tc_ci_03_template_payload_is_not_evaluated (core.tests.SecureCodingTestCase.test_tc_ci_03_template_payload_is_not_evaluated) ... ok
+test_tc_ci_04j_iframe_payload_in_hr_field_is_rejected (core.tests.SecureCodingTestCase.test_tc_ci_04j_iframe_payload_in_hr_field_is_rejected) ... ok
+test_tc_csrf_01_all_write_forms_render_csrf_token (core.tests.SecureCodingTestCase.test_tc_csrf_01_all_write_forms_render_csrf_token) ... ok
+test_tc_csrf_02_invalid_token_is_rejected_and_employee_data_unchanged (core.tests.SecureCodingTestCase.test_tc_csrf_02_invalid_token_is_rejected_and_employee_data_unchanged) ... ok
+test_tc_csrf_03_cross_origin_post_without_token_is_rejected (core.tests.SecureCodingTestCase.test_tc_csrf_03_cross_origin_post_without_token_is_rejected) ... ok
+test_tc_csrf_04j_hr_salary_or_position_update_without_valid_csrf_is_rejected (core.tests.SecureCodingTestCase.test_tc_csrf_04j_hr_salary_or_position_update_without_valid_csrf_is_rejected) ... ok
+test_tc_sqli_01_login_bypass_payload_fails (core.tests.SecureCodingTestCase.test_tc_sqli_01_login_bypass_payload_fails) ... ok
+test_tc_sqli_02_union_based_search_does_not_extract_user_table (core.tests.SecureCodingTestCase.test_tc_sqli_02_union_based_search_does_not_extract_user_table) ... ok
+test_tc_sqli_03_whitebox_uses_orm_not_raw_sql_concatenation (core.tests.SecureCodingTestCase.test_tc_sqli_03_whitebox_uses_orm_not_raw_sql_concatenation) ... ok
+test_tc_sqli_04j_hr_employee_id_payload_only_returns_emp001 (core.tests.SecureCodingTestCase.test_tc_sqli_04j_hr_employee_id_payload_only_returns_emp001) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.745s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+ OK
+System check identified no issues (0 silenced).

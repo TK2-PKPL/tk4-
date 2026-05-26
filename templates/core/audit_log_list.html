@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Audit Log - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading">
+  <span class="eyebrow">Akuntabilitas</span>
+  <h1>Audit log</h1>
+  <p>Log mencatat aksi penting seperti login, perubahan data karyawan, check in, check out, pembuatan payroll, dan approval payroll.</p>
+</section>
+<div class="table-card">
+  <table>
+    <thead><tr><th>Waktu</th><th>Aktor</th><th>Aksi</th><th>Target</th><th>IP</th><th>Detail</th></tr></thead>
+    <tbody>
+      {% for log in logs %}
+        <tr>
+          <td>{{ log.created_at|date:"d M Y H:i" }}</td>
+          <td>{{ log.actor.display_name|default:"-" }}</td>
+          <td>{{ log.action }}</td>
+          <td>{{ log.target }}</td>
+          <td>{{ log.ip_address|default:"-" }}</td>
+          <td>{{ log.detail }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">Belum ada log.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

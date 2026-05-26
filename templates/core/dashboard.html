@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading">
+  <span class="eyebrow">Dashboard</span>
+  <h1>Selamat datang, {{ request.user.display_name|default:request.user.username }}</h1>
+  <p>Peran aktif Anda adalah {{ request.user.role_label }}. Menu dan data yang tampil dibatasi berdasarkan prinsip least privilege.</p>
+</section>
+
+<section class="metric-grid">
+  <article class="metric"><span>Total karyawan</span><strong>{{ employee_count }}</strong></article>
+  <article class="metric"><span>Absensi hari ini</span><strong>{{ attendance_count }}</strong></article>
+  <article class="metric"><span>Slip payroll</span><strong>{{ payroll_count }}</strong></article>
+</section>
+
+<section class="card-grid two">
+  <article class="card">
+    <h3>Aksi cepat</h3>
+    <div class="button-stack">
+      {% if profile %}<a class="btn btn-soft" href="{% url 'my_profile' %}">Lihat profil saya</a>{% endif %}
+      <a class="btn btn-soft" href="{% url 'attendance_list' %}">Kelola absensi</a>
+      <a class="btn btn-soft" href="{% url 'payroll_list' %}">Lihat payroll</a>
+      {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+        <a class="btn btn-primary" href="{% url 'employee_create' %}">Tambah karyawan</a>
+        <a class="btn btn-primary" href="{% url 'payroll_create' %}">Buat payroll</a>
+      {% endif %}
+    </div>
+  </article>
+  <article class="card">
+    <h3>Audit log terbaru</h3>
+    <ul class="compact-list">
+      {% for log in recent_logs %}
+        <li><strong>{{ log.action }}</strong><span>{{ log.created_at|date:"d M Y H:i" }} - {{ log.target }}</span></li>
+      {% empty %}
+        <li>Belum ada log.</li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+{% endblock %}

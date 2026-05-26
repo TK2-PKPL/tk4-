@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Detail Payroll - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section-heading row-between">
+  <div>
+    <span class="eyebrow">Slip gaji</span>
+    <h1>{{ payroll.employee.full_name }} - {{ payroll.period }}</h1>
+    <p>Status: {{ payroll.get_status_display }}</p>
+  </div>
+  <div class="inline-form">
+    {% if request.user.role == 'hr' or request.user.role == 'admin' or request.user.is_superuser %}
+      {% if payroll.status == 'draft' or payroll.status == 'submitted' %}
+        <a class="btn btn-soft" href="{% url 'payroll_update' payroll.pk %}">Update draft</a>
+      {% endif %}
+    {% endif %}
+    {% if request.user.role == 'finance' or request.user.role == 'admin' or request.user.is_superuser %}
+      {% if payroll.status == 'draft' or payroll.status == 'submitted' %}
+        <form method="post" action="{% url 'payroll_approve' payroll.pk %}">
+          {% csrf_token %}
+          <button class="btn btn-primary" type="submit">Setujui payroll</button>
+        </form>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<section class="detail-grid">
+  <article class="card"><h3>Komponen</h3><p>Gaji pokok: Rp {{ payroll.basic_salary }}</p><p>Tunjangan: Rp {{ payroll.allowance }}</p><p>Potongan: Rp {{ payroll.deduction }}</p><p><strong>Total: Rp {{ payroll.total_salary }}</strong></p></article>
+  <article class="card"><h3>Verifikasi</h3><p>Rekening snapshot: {{ payroll.bank_account_snapshot }}</p><p>Dibuat oleh: {{ payroll.created_by.display_name|default:"-" }}</p><p>Disetujui oleh: {{ payroll.approved_by.display_name|default:"-" }}</p><p>Waktu approval: {{ payroll.approved_at|date:"d M Y H:i"|default:"-" }}</p></article>
+</section>
+{% endblock %}

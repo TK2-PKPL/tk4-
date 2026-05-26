@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Masuk - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="hero-grid">
+  <div class="hero-copy">
+    <span class="eyebrow">Sistem HR & Payroll</span>
+    <h1>Portal aman untuk data karyawan, absensi, dan slip gaji.</h1>
+    <p>Aplikasi ini dikembangkan sebagai implementasi Secure Coding untuk skenario Sistem HR & Payroll Perusahaan. Fokus utamanya adalah validasi input, autentikasi aman, perlindungan CSRF, kontrol akses berbasis peran, dan keamanan database berbasis ORM.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{% url 'login' %}">Masuk ke sistem</a>
+      <a class="btn btn-soft" href="#fitur">Lihat fitur</a>
+    </div>
+  </div>
+  <div class="security-card">
+    <h2>Kontrol keamanan</h2>
+    <div class="check-list">
+      <p>PBKDF2 password hashing</p>
+      <p>Lockout setelah 5 login gagal</p>
+      <p>CSRF token pada semua form write</p>
+      <p>Django ORM untuk akses SQLite</p>
+      <p>Audit log untuk aksi sensitif</p>
+    </div>
+  </div>
+</section>
+
+<section id="fitur" class="card-grid three">
+  <article class="card"><h3>Data karyawan</h3><p>HR mengelola master data karyawan. Karyawan hanya dapat melihat profilnya sendiri.</p></article>
+  <article class="card"><h3>Absensi</h3><p>Karyawan melakukan check in dan check out melalui form yang divalidasi dan dilindungi CSRF.</p></article>
+  <article class="card"><h3>Slip gaji</h3><p>HR membuat payroll, Finance menyetujui, dan karyawan hanya melihat slip yang sudah disetujui.</p></article>
+</section>
+{% endblock %}
