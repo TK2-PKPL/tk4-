@@ -20,7 +20,7 @@ Link video YouTube Unlisted: https://youtu.be/QJkPfljkLCE?si=p4_14dYbqTLFwwYc
 
 ## 3. Ringkasan Aplikasi yang Diuji
 
-Aplikasi yang diuji adalah **Secure HR & Payroll Portal**, yaitu aplikasi web sederhana berbasis Django dan SQLite untuk skenario **Sistem HR & Payroll Perusahaan**. Aplikasi ini melanjutkan skenario Tugas 1 dan implementasi secure coding pada Tugas 3.
+Aplikasi yang diuji adalah **Secure HR & Payroll Portal**, yaitu aplikasi web sederhana berbasis Django dan SQLite untuk skenario **Sistem HR & Payroll Perusahaan**.
 
 Fitur utama aplikasi meliputi:
 
